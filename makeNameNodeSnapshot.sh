@@ -14,10 +14,11 @@
 # See the License for the specific language governing permissions and
 # limitations under the License.
 
-# Creates a snapshot of the Hadoop Namenode Metadata..
-# * Only notifies you if there is a problem and outpouts a log.
+# Creates a snapshot of the Hadoop NameNode Metadata..
+# * Only notifies you if there is a problem and outputs a log.
 # * Retires snapshots older than a week.
 # * Put it in cron to run hourly.
+# * Requires the following libraries: sed,df,mail,awk,bc,find,curl and zip
 
 nameNode=namenode.example.com
 email="you@example.com"
