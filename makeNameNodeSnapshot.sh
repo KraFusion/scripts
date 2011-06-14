@@ -81,7 +81,7 @@ function checkTargetSpace () {
 
    if [ $targetSpacePercent -ge $targetSpaceThresh ]; then
 
-      errSubject="[$(hostname -s)] NameNode Snapshot Error:  Not enough free space on target. ($tsToday)"
+      errSubject="[$(hostname -s)] NameNode Snapshot Error:  Not enough free space on target. ($tsNow)"
       errMessage="NameNode Snapshot Error:\n\n\tFree Space on $targetDir is $targetSpacePercent%, threshold is $targetSpaceThresh%"
 
       echo -e "$errMessage" | /bin/mail -s "$errSubject" $email
@@ -96,7 +96,7 @@ function checkIfSnapshotExists () {
 
    if [ -s $snapNow ]; then
 
-      errSubject="[$(hostname -s)] NameNode Snapshot Error:  Snapshot already exists! ($tsToday)"
+      errSubject="[$(hostname -s)] NameNode Snapshot Error:  Snapshot already exists! ($tsNow)"
       errMessage="NameNode Snapshot Error:\n\n\tSnapshot script was halted because $(hostname -s):$snapNow already exists. Please investigate why and restart the snapshot manually."
 
       echo -e "$errMessage" | /bin/mail -s "$errSubject" $email
@@ -110,7 +110,7 @@ function checkForLastSnapshot () {
 
    if [ ! -s $snapLast ]; then
 
-      errSubject="[$(hostname -s)] NameNode Snapshot Notice:  Previous hour's snapshot does not exist! ($tsToday)"
+      errSubject="[$(hostname -s)] NameNode Snapshot Notice:  Previous hour's snapshot does not exist! ($tsNow)"
       errMessage="NameNode Snapshot Notice:\n\n\tThis is only informational, but $(hostname -s):$snapLast does not exist.\n\n\tToday's snapshot will continue to run but please investigate why the last ($tsLast) snapshot did not complete."
 
       echo -e "$errMessage" | /bin/mail -s "$errSubject" $email
